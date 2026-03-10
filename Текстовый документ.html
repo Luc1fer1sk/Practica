@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Медицинский центр - квалифицированная медицинская помощь в Республике Беларусь">
+    <meta name="theme-color" content="#2E7D32">
+    <title>Медицинский Центр | Здоровье и Забота</title>
+    <style>
+        /* ===== ОБНУЛЕНИЕ И БАЗОВЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2E7D32;
+            --secondary-color: #1565C0;
+            --accent-color: #C62828;
+            --text-dark: #212121;
+            --text-light: #757575;
+            --bg-light: #F5F5F5;
+            --white: #FFFFFF;
+            --border-radius: 8px;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ===== ШАПКА ===== */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 13px;
+            display: none;
+        }
+
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-info {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .header-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+
+        .header-main {
+            padding: 12px 0;
+        }
+
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+            z-index: 1001;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        /* МЕНЮ ДЛЯ МОБИЛЬНЫХ */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 15px;
+            padding: 8px 0;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-login {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-login {
+            padding: 8px 16px;
+            font-size: 13px;
+            border-radius: 999px;
+            border: 1px solid var(--accent-color);
+            background: transparent;
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            background: var(--accent-color);
+            color: var(--white);
+            box-shadow: 0 3px 10px rgba(198, 40, 40, 0.3);
+        }
+
+        /* ===== ГЛАВНЫЙ ЭКРАН ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 140px 0 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2.5vw, 20px);
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== КНОПКИ ===== */
+        .btn {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 14px 28px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 48px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:hover {
+            background: #1B5E20;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .hero .btn-outline {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .hero .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 18px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        /* ===== СЕКЦИИ ===== */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(24px, 4vw, 36px);
+            margin-bottom: 40px;
+            color: var(--text-dark);
+            padding: 0 15px;
+        }
+
+        /* ===== УСЛУГИ ===== */
+        .services {
+            background: var(--bg-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 30px 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:active {
+            transform: scale(0.98);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: var(--white);
+        }
+
+        .service-card h3 {
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ===== ВРАЧИ ===== */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .doctor-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .doctor-card:active {
+            transform: scale(0.98);
+        }
+
+        .doctor-photo {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: var(--white);
+        }
+
+        .doctor-info {
+            padding: 20px 15px;
+        }
+
+        .doctor-info h3 {
+            margin-bottom: 5px;
+            color: var(--text-dark);
+            font-size: 18px;
+        }
+
+        .doctor-info p {
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        /* ===== ЗАПИСЬ НА ПРИЁМ ===== */
+        .appointment {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .appointment-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: var(--border-radius);
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            min-height: 48px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-checkbox label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-weight: normal;
+            font-size: 13px;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .form-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contacts {
+            background: var(--bg-light);
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 22px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            flex-shrink: 0;
+            font-size: 20px;
+        }
+
+        .contact-item div {
+            line-height: 1.6;
+        }
+
+        .contact-item strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+        }
+
+        /* ===== ПОДВАЛ ===== */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 40px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: var(--white);
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section a {
+            color: #BDBDBD;
+            transition: color 0.3s;
+            font-size: 14px;
+            display: inline-block;
+            padding: 2px 0;
+        }
+
+        .footer-section a:active {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #424242;
+            padding-top: 20px;
+            text-align: center;
+            color: #BDBDBD;
+            font-size: 13px;
+        }
+
+        .legal-info {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #9E9E9E;
+            line-height: 1.6;
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 30px 25px;
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: var(--bg-light);
+            padding: 4px;
+            border-radius: 999px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: all 0.2s;
+        }
+
+        .auth-tab.active {
+            background: var(--primary-color);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .auth-pane {
+            display: none;
+        }
+
+        .auth-pane.active {
+            display: block;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 32px;
+            cursor: pointer;
+            color: var(--text-light);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .modal-close:active {
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* ===== ДОСТУПНОСТЬ ===== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 8px 16px;
+            z-index: 3000;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ ===== */
+        @media (max-width: 992px) {
+            .header-top {
+                display: block;
+            }
+
+            .header-info {
+                justify-content: center;
+            }
+
+            .header-emergency {
+                display: none;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+
+            .services-grid,
+            .doctors-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ===== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ===== */
+        @media (max-width: 768px) {
+            html {
+                font-size: 15px;
+            }
+
+            .container {
+                padding: 0 12px;
+            }
+
+            /* Шапка */
+            .header-top {
+                display: none;
+            }
+
+            .header-main {
+                padding: 10px 0;
+            }
+
+            .logo span {
+                font-size: 18px;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 24px;
+            }
+
+            /* Мобильное меню */
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--white);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.3s ease-in-out;
+                z-index: 1000;
+                padding: 80px 20px 20px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+            }
+
+            nav li {
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            nav a {
+                padding: 15px 0;
+                font-size: 18px;
+                display: block;
+            }
+
+            .header-btn {
+                display: none;
+            }
+
+            .header-login {
+                display: none;
+            }
+
+            /* Затемнение фона при открытом меню */
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+
+            /* Герой секция */
+            .hero {
+                padding: 100px 0 40px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero .btn {
+                width: 100%;
+                max-width: none;
+            }
+
+            /* Секции */
+            section {
+                padding: 40px 0;
+            }
+
+            .section-title {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            /* Сетки */
+            .services-grid,
+            .doctors-grid,
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Форма */
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .appointment-form {
+                padding: 25px 15px;
+            }
+
+            .btn-large {
+                width: 100%;
+                max-width: none;
+            }
+
+            /* Подвал */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .footer-bottom {
+                font-size: 12px;
+            }
+
+            /* Контактные иконки */
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+
+        /* ===== МАЛЕНЬКИЕ МОБИЛЬНЫЕ ===== */
+        @media (max-width: 480px) {
+            html {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .logo span {
+                display: none;
+            }
+
+            .service-card {
+                padding: 20px 15px;
+            }
+
+            .service-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+            }
+
+            .doctor-photo {
+                height: 200px;
+                font-size: 60px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+
+            .modal-content {
+                padding: 25px 15px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 12px;
+                font-size: 16px; /* Предотвращает зум на iOS */
+            }
+        }
+
+        /* ===== ОРИЕНТАЦИЯ ===== */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .modal-content {
+                max-height: 95vh;
+            }
+
+            .hero {
+                padding: 80px 0 30px;
+            }
+        }
+
+        /* ===== TOUCH УСТРОЙСТВА ===== */
+        @media (hover: none) {
+            .btn:hover {
+                transform: none;
+            }
+
+            .service-card:hover,
+            .doctor-card:hover {
+                transform: none;
+            }
+
+            nav a:hover {
+                color: inherit;
+            }
+        }
+
+        /* ===== ПЕЧАТЬ ===== */
+        @media print {
+            header,
+            .hero,
+            .appointment,
+            footer,
+            .mobile-menu-toggle {
+                display: none !important;
+            }
+
+            body {
+                font-size: 12pt;
+                color: black;
+                background: white;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ссылка для пропуска навигации -->
+    <a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
+
+    <!-- Затемнение фона -->
+    <div class="overlay" onclick="toggleMenu()"></div>
+
+    <!-- ===== ШАПКА ===== -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-info">
+                    <span>📍 г. Минск, ул. Ленина, 10</span>
+                    <span>📞 +375 (17) 123-45-67</span>
+                    <span>🕐 Пн-Пт: 8:00 - 20:00</span>
+                </div>
+                <div class="header-emergency">
+                    <span>🚑 Экстренная помощь: 103</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <div class="logo-icon">+</div>
+                    <span>Медицинский Центр</span>
+                </div>
+                
+                <!-- Кнопка мобильного меню -->
+                <button class="mobile-menu-toggle" onclick="toggleMenu()" aria-label="Открыть меню" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div class="header-actions">
+                    <nav id="mainNav">
+                        <ul>
+                            <li><a href="#services" onclick="closeMenu()">Услуги</a></li>
+                            <li><a href="#doctors" onclick="closeMenu()">Врачи</a></li>
+                            <li><a href="#appointment" onclick="closeMenu()">Запись</a></li>
+                            <li><a href="#contacts" onclick="closeMenu()">Контакты</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-login">
+                        <button type="button" class="btn-login" onclick="openDoctorLoginModal()">Вход для врача</button>
+                        <button type="button" class="btn-login" onclick="openPatientAuthModal()">Вход для пациента</button>
+                    </div>
+                    <button class="btn header-btn" onclick="openModal()">Записаться</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+    <section class="hero">
+        <div class="container">
+            <h1>Забота о вашем здоровье — наш приоритет</h1>
+            <p>Квалифицированная медицинская помощь в соответствии со стандартами Республики Беларусь</p>
+            <div class="hero-buttons">
+                <button class="btn btn-large" onclick="scrollToSection('appointment')">Записаться на приём</button>
+                <button class="btn btn-large btn-outline" onclick="scrollToSection('services')">Наши услуги</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ОСНОВНОЕ СОДЕРЖИМОЕ ===== -->
+    <main id="main-content">
+        <!-- ===== УСЛУГИ ===== -->
+        <section class="services" id="services">
+            <div class="container">
+                <h2 class="section-title">Наши услуги</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">👨‍⚕️</div>
+                        <h3>Терапия</h3>
+                        <p>Первичная медицинская помощь, диагностика и лечение общих заболеваний</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔬</div>
+                        <h3>Диагностика</h3>
+                        <p>Лабораторные исследования, УЗИ, рентген, ЭКГ и другие виды диагностики</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💊</div>
+                        <h3>Специализированная помощь</h3>
+                        <p>Приём узких специалистов: кардиолог, невролог, эндокринолог и другие</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🏥</div>
+                        <h3>Стационар</h3>
+                        <p>Круглосуточное наблюдение и лечение в комфортных палатах</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🚑</div>
+                        <h3>Неотложная помощь</h3>
+                        <p>Экстренная медицинская помощь 24/7</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📋</div>
+                        <h3>Профилактика</h3>
+                        <p>Диспансеризация, вакцинация, профилактические осмотры</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ВРАЧИ ===== -->
+        <section class="doctors" id="doctors">
+            <div class="container">
+                <h2 class="section-title">Наши специалисты</h2>
+                <div class="doctors-grid">
+                    <div class="doctor-card">
+                        <div class="doctor-photo">👨‍️</div>
+                        <div class="doctor-info">
+                            <h3>Петров Иван Сергеевич</h3>
+                            <p>Врач-терапевт</p>
+                            <p>Стаж: 15 лет</p>
+                        </div>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-photo">👩‍⚕️</div>
+                        <div class="doctor-info">
+                            <h3>Сидорова Мария Александровна</h3>
+                            <p>Врач-кардиолог</p>
+                            <p>Стаж: 12 лет</p>
+                        </div>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-photo">👨‍⚕️</div>
+                        <div class="doctor-info">
+                            <h3>Козлов Дмитрий Петрович</h3>
+                            <p>Врач-невролог</p>
+                            <p>Стаж: 10 лет</p>
+                        </div>
+                    </div>
+                    <div class="doctor-card">
+                        <div class="doctor-photo">👩‍⚕️</div>
+                        <div class="doctor-info">
+                            <h3>Иванова Елена Владимировна</h3>
+                            <p>Врач-педиатр</p>
+                            <p>Стаж: 18 лет</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ЗАПИСЬ НА ПРИЁМ ===== -->
+        <section class="appointment" id="appointment">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Запись на приём</h2>
+                <form class="appointment-form" id="appointmentForm" onsubmit="submitForm(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lastName">Фамилия *</label>
+                            <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName">Имя *</label>
+                            <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Телефон *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+375 (XX) XXX-XX-XX" required autocomplete="tel">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" autocomplete="email">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="doctor">Выберите врача *</label>
+                            <select id="doctor" name="doctor" required>
+                                <option value="">-- Выберите специалиста --</option>
+                                <option value="therapist">Терапевт</option>
+                                <option value="cardiologist">Кардиолог</option>
+                                <option value="neurologist">Невролог</option>
+                                <option value="pediatrician">Педиатр</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Дата приёма *</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Комментарий</label>
+                        <textarea id="message" name="message" placeholder="Опишите вашу проблему..."></textarea>
+                    </div>
+                    <div class="form-group form-checkbox">
+                        <label>
+                            <input type="checkbox" required>
+                            <span>Я согласен(на) на обработку персональных данных в соответствии с Законом Республики Беларусь «О защите персональных данных»</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-large">Записаться</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== КОНТАКТЫ ===== -->
+        <section class="contacts" id="contacts">
+            <div class="container">
+                <h2 class="section-title">Контакты</h2>
+                <div class="contacts-grid">
+                    <div class="contact-info">
+                        <h3>Информация</h3>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Адрес:</strong>
+                                220030, Республика Беларусь,<br>
+                                г. Минск, ул. Ленина, 10
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <strong>Телефон:</strong><br>
+                                +375 (17) 123-45-67<br>
+                                +375 (29) 123-45-67 (МТС)<br>
+                                +375 (44) 123-45-67 (А1)
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <strong>Email:</strong><br>
+                                info@medical-center.by
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🕐</div>
+                            <div>
+                                <strong>Режим работы:</strong><br>
+                                Пн-Пт: 8:00 - 20:00<br>
+                                Сб: 9:00 - 15:00<br>
+                                Вс: Выходной
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Экстренные службы</h3>
+                        <div class="contact-item">
+                            <div class="contact-icon">🚑</div>
+                            <div>
+                                <strong>Скорая помощь:</strong><br>
+                                103 (с мобильного)<br>
+                                03 (с городского)
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🏥</div>
+                            <div>
+                                <strong>Приёмный покой:</strong><br>
+                                +375 (17) 123-45-68<br>
+                                Круглосуточно
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📋</div>
+                            <div>
+                                <strong>Горячая линия Минздрава:</strong><br>
+                                8-017-222-31-55
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== ПОДВАЛ ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>О центре</h4>
+                    <ul>
+                        <li><a href="#">Лицензия МЗ РБ №12345 от 01.01.2020</a></li>
+                        <li><a href="#">Сертификаты</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                        <li><a href="#">Новости</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Пациентам</h4>
+                    <ul>
+                        <li><a href="#">Правила приёма</a></li>
+                        <li><a href="#">Страховые компании</a></li>
+                        <li><a href="#">Цены на услуги</a></li>
+                        <li><a href="#">Отзывы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Документы</h4>
+                    <ul>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Пользовательское соглашение</a></li>
+                        <li><a href="#">Информация о юр. лице</a></li>
+                        <li><a href="#">Обращения граждан</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Мы в соцсетях</h4>
+                    <ul>
+                        <li><a href="#">VKontakte</a></li>
+                        <li><a href="#">Telegram</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Медицинский Центр. Все права защищены.</p>
+                <p class="legal-info">
+                    УНП 123456789 | Лицензия МЗ РБ №12345 от 01.01.2020<br>
+                    Информация на сайте не является публичной офертой<br>
+                    Имеются противопоказания, необходима консультация специалиста
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО: ЗАПИСЬ НА ПРИЁМ ===== -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()" aria-label="Закрыть">&times;</span>
+            <h2 style="margin-bottom: 20px; color: var(--primary-color);">Запись на приём</h2>
+            <p>Для записи позвоните нам по телефону:</p>
+            <p style="font-size: 24px; font-weight: bold; margin: 20px 0; color: var(--primary-color);">+375 (17) 123-45-67</p>
+            <p>Или заполните форму в разделе "Запись на приём"</p>
+            <button class="btn" style="margin-top: 20px; width: 100%;" onclick="closeModal()">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО: ВХОД ДЛЯ ВРАЧА ===== -->
+    <div class="modal" id="doctorLoginModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeDoctorLoginModal()" aria-label="Закрыть">&times;</span>
+            <h2 style="margin-bottom: 20px; color: var(--primary-color);">Вход для врача</h2>
+            <form class="appointment-form auth-form" onsubmit="submitDoctorLogin(event)">
+                <div class="form-group">
+                    <label for="doctorLoginEmail">Email</label>
+                    <input type="email" id="doctorLoginEmail" name="email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="doctorLoginPassword">Пароль</label>
+                    <input type="password" id="doctorLoginPassword" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-large">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО: ВХОД / РЕГИСТРАЦИЯ ПАЦИЕНТА ===== -->
+    <div class="modal" id="patientAuthModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closePatientAuthModal()" aria-label="Закрыть">&times;</span>
+            <h2 style="margin-bottom: 16px; color: var(--primary-color);">Личный кабинет пациента</h2>
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab active" id="patientLoginTab" onclick="switchPatientTab('login')">Вход</button>
+                <button type="button" class="auth-tab" id="patientRegisterTab" onclick="switchPatientTab('register')">Регистрация</button>
+            </div>
+
+            <div class="auth-pane active" id="patientLoginPane">
+                <form class="appointment-form auth-form" onsubmit="submitPatientLogin(event)">
+                    <div class="form-group">
+                        <label for="patientLoginPhone">Телефон</label>
+                        <input type="tel" id="patientLoginPhone" name="phone" placeholder="+375 (XX) XXX-XX-XX" required autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="patientLoginPassword">Пароль</label>
+                        <input type="password" id="patientLoginPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-large">Войти</button>
+                </form>
+            </div>
+
+            <div class="auth-pane" id="patientRegisterPane">
+                <form class="appointment-form auth-form" onsubmit="submitPatientRegister(event)">
+                    <div class="form-group">
+                        <label for="patientRegLastName">Фамилия *</label>
+                        <input type="text" id="patientRegLastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientRegFirstName">Имя *</label>
+                        <input type="text" id="patientRegFirstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientRegPhone">Телефон *</label>
+                        <input type="tel" id="patientRegPhone" name="phone" placeholder="+375 (XX) XXX-XX-XX" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientRegEmail">Email</label>
+                        <input type="email" id="patientRegEmail" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="patientRegPassword">Пароль *</label>
+                        <input type="password" id="patientRegPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-large">Зарегистрироваться</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ===== МОБИЛЬНОЕ МЕНЮ =====
+        function toggleMenu() {
+            const nav = document.getElementById('mainNav');
+            const overlay = document.querySelector('.overlay');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            
+            // Обновляем aria-expanded
+            const isExpanded = nav.classList.contains('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+            
+            // Блокируем прокрутку body
+            document.body.style.overflow = isExpanded ? 'hidden' : '';
+        }
+
+        function closeMenu() {
+            const nav = document.getElementById('mainNav');
+            const overlay = document.querySelector('.overlay');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            nav.classList.remove('active');
+            overlay.classList.remove('active');
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+
+        // ===== МОДАЛЬНОЕ ОКНО: ЗАПИСЬ =====
+        function openModal() {
+            document.getElementById('modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            closeMenu();
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // ===== МОДАЛЬНЫЕ ОКНА: ВХОД =====
+        function openDoctorLoginModal() {
+            document.getElementById('doctorLoginModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            closeMenu();
+        }
+
+        function closeDoctorLoginModal() {
+            document.getElementById('doctorLoginModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function openPatientAuthModal() {
+            switchPatientTab('login');
+            document.getElementById('patientAuthModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            closeMenu();
+        }
+
+        function closePatientAuthModal() {
+            document.getElementById('patientAuthModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function switchPatientTab(mode) {
+            const loginTab = document.getElementById('patientLoginTab');
+            const registerTab = document.getElementById('patientRegisterTab');
+            const loginPane = document.getElementById('patientLoginPane');
+            const registerPane = document.getElementById('patientRegisterPane');
+
+            const isLogin = mode === 'login';
+
+            loginTab.classList.toggle('active', isLogin);
+            registerTab.classList.toggle('active', !isLogin);
+            loginPane.classList.toggle('active', isLogin);
+            registerPane.classList.toggle('active', !isLogin);
+        }
+
+        // ===== ОБРАБОТКА ФОРМ ВХОДА / РЕГИСТРАЦИИ =====
+        function submitDoctorLogin(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            console.log('Вход врача:', data);
+            alert('Демо: успешный вход врача. Переход в кабинет врача.');
+            event.target.reset();
+            closeDoctorLoginModal();
+            window.location.href = 'VProfile.html';
+        }
+
+        function submitPatientLogin(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            console.log('Вход пациента:', data);
+            alert('Демо: успешный вход пациента. Переход в профиль пациента.');
+            event.target.reset();
+            closePatientAuthModal();
+            window.location.href = 'PProfile.html';
+        }
+
+        function submitPatientRegister(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            console.log('Регистрация пациента:', data);
+            alert('Демо: регистрация завершена. Теперь вы будете перенаправлены в профиль пациента.');
+            event.target.reset();
+            closePatientAuthModal();
+            window.location.href = 'PProfile.html';
+        }
+
+        // Закрытие по клику вне окна
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(function(m) {
+                if (event.target === m) {
+                    m.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+
+        // ===== ПЛАВНАЯ ПРОКРУТКА =====
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const headerOffset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+            closeMenu();
+        }
+
+        // ===== ОТПРАВКА ФОРМЫ =====
+        function submitForm(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Валидация телефона
+            const phonePattern = /^\+375\s?\(\d{2}\)\s?\d{3}-\d{2}-\d{2}$/;
+            if (!phonePattern.test(data.phone)) {
+                alert('Пожалуйста, введите телефон в формате: +375 (XX) XXX-XX-XX');
+                return;
+            }
+            
+            console.log('Данные формы:', data);
+            alert('Ваша заявка принята! Наш специалист свяжется с вами в ближайшее время.');
+            event.target.reset();
+        }
+
+        // ===== МАСКА ДЛЯ ТЕЛЕФОНА =====
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value[0] === '7') value = value.slice(1);
+                if (value[0] === '8') value = value.slice(1);
+                if (value.startsWith('375')) value = value.slice(3);
+                
+                value = '375' + value;
+            }
+            
+            if (value.length > 3) {
+                value = '+375 (' + value.slice(3, 5) + ') ' + value.slice(5, 8) + '-' + value.slice(8, 10) + '-' + value.slice(10, 12);
+            } else if (value.length > 0) {
+                value = '+375 (' + value.slice(3);
+            }
+            
+            e.target.value = value;
+        });
+
+        // ===== МИНИМАЛЬНАЯ ДАТА =====
+        const dateInput = document.getElementById('date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        // ===== ЗАКРЫТИЕ МЕНЮ ПРИ ИЗМЕНЕНИИ РАЗМЕРА ОКНА =====
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
+
+        // ===== ЗАКРЫТИЕ ПО ESC =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(function(m) {
+                    m.style.display = 'none';
+                });
+                document.body.style.overflow = '';
+                closeMenu();
+            }
+        });
+
+        // ===== TOUCH СВОЙСТВА =====
+        let touchStartY = 0;
+        document.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+        }, {passive: true});
+
+        // ===== ПРЕДОТВРАЩЕНИЕ ЗУМА НА iOS =====
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
