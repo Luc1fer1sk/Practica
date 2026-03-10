@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кабинет врача | Медицинский центр</title>
+    <style>
+        :root {
+            --primary-color: #2E7D32;
+            --secondary-color: #1565C0;
+            --accent-color: #C62828;
+            --text-dark: #212121;
+            --text-light: #757575;
+            --bg-light: #F5F5F5;
+            --white: #FFFFFF;
+            --border-radius: 10px;
+            --shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #E8F5E9, #E1F5FE);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 22px;
+        }
+
+        .user-mini {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .user-name-mini {
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .logout-btn {
+            border: none;
+            background: transparent;
+            color: var(--accent-color);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 20px 16px 32px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 18px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 999px;
+            background: rgba(21, 101, 192, 0.06);
+            color: var(--secondary-color);
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #1B5E20;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary-color);
+            color: #fff;
+        }
+
+        .list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .list-item {
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #FAFAFA;
+            border: 1px solid #EEEEEE;
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+            gap: 8px;
+            align-items: center;
+        }
+
+        .list-main {
+            font-size: 14px;
+        }
+
+        .list-title {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .list-meta {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .list-secondary {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 11px;
+        }
+
+        .status-planned {
+            background: rgba(21, 101, 192, 0.08);
+            color: var(--secondary-color);
+        }
+
+        .status-done {
+            background: rgba(46, 125, 50, 0.08);
+            color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-light);
+            padding: 10px 0 18px;
+        }
+
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .list-item {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">+</div>
+            <span>Медицинский центр</span>
+        </div>
+        <div class="user-mini">
+            <div class="user-avatar">👨‍⚕️</div>
+            <div class="user-name-mini">
+                Врач · Петров И.С.<br>
+                <small style="color:#757575;">Кабинет врача</small>
+            </div>
+            <button class="logout-btn" onclick="window.location.href='Текстовый документ.html'">Выйти</button>
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="card">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Записи пациентов на сегодня</div>
+                    <div class="pill">Демо-список приёмов</div>
+                </div>
+                <button class="btn btn-outline" type="button" onclick="alert('Демо: здесь может быть фильтр или печать расписания.')">
+                    Экспорт
+                </button>
+            </div>
+            <ul class="list">
+                <li class="list-item">
+                    <div class="list-main">
+                        <div class="list-title">Иванов Иван · 10:00</div>
+                        <div class="list-meta">
+                            Терапия · Кабинет 203 · Повторный приём
+                        </div>
+                    </div>
+                    <div class="list-secondary">
+                        <div class="status-pill status-planned">Запланирован</div>
+                        <div style="margin-top:4px;">Жалобы: кашель, слабость, температура до 37.5°</div>
+                    </div>
+                </li>
+                <li class="list-item">
+                    <div class="list-main">
+                        <div class="list-title">Петрова Анна · 11:30</div>
+                        <div class="list-meta">
+                            Консультация по анализам · Кабинет 203
+                        </div>
+                    </div>
+                    <div class="list-secondary">
+                        <div class="status-pill status-planned">Запланирован</div>
+                        <div style="margin-top:4px;">Принесла результаты анализов, требуется корректировка терапии.</div>
+                    </div>
+                </li>
+                <li class="list-item">
+                    <div class="list-main">
+                        <div class="list-title">Сидоров Алексей · 14:00</div>
+                        <div class="list-meta">
+                            Осмотр после стационара · Кабинет 203
+                        </div>
+                    </div>
+                    <div class="list-secondary">
+                        <div class="status-pill status-planned">Запланирован</div>
+                        <div style="margin-top:4px;">Контроль состояния, коррекция рекомендаций.</div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">История лечения пациентов</div>
+                    <div class="pill">Общая сводка (демо)</div>
+                </div>
+            </div>
+            <ul class="list">
+                <li class="list-item">
+                    <div class="list-main">
+                        <div class="list-title">Иванов Иван</div>
+                        <div class="list-meta">
+                            10.02.2026 · ОРВИ средней тяжести
+                        </div>
+                    </div>
+                    <div class="list-secondary">
+                        <div class="status-pill status-done">Завершено</div>
+                        <div style="margin-top:4px;">Курс терапии завершён, состояние удовлетворительное, контроль через 3 месяца.</div>
+                    </div>
+                </li>
+                <li class="list-item">
+                    <div class="list-main">
+                        <div class="list-title">Петрова Анна</div>
+                        <div class="list-meta">
+                            21.01.2026 · Коррекция гипотензивной терапии
+                        </div>
+                    </div>
+                    <div class="list-secondary">
+                        <div class="status-pill status-done">Завершено</div>
+                        <div style="margin-top:4px;">Подобраны препараты, рекомендован контроль АД и приём через 6 месяцев.</div>
+                    </div>
+                </li>
+                <li class="list-item">
+                    <div class="list-main">
+                        <div class="list-title">Сидоров Алексей</div>
+                        <div class="list-meta">
+                            15.12.2025 · Наблюдение после стационара
+                        </div>
+                    </div>
+                    <div class="list-secondary">
+                        <div class="status-pill status-done">Завершено</div>
+                        <div style="margin-top:4px;">Состояние стабильно, рекомендовано диспансерное наблюдение.</div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        Кабинет врача (демо). Данные и списки приведены для примера интерфейса.
+    </footer>
+</body>
+</html>
